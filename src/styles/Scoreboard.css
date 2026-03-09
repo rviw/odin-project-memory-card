@@ -1,9 +1,23 @@
 .scoreboard {
   display: flex;
-  gap: 1.5rem;
+  justify-content: center;
+  gap: 3em;
   margin-bottom: 2rem;
 }
 
 .scoreboard__item {
+  display: grid;
+  justify-items: center;
+  gap: 0.1em;
+}
+
+.scoreboard__label {
   font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.scoreboard__value {
+  font-size: 1.75rem;
+  font-weight: 800;
 }
