@@ -6,6 +6,24 @@ function CardGrid() {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  function shuffleCharacters(items) {
+    const shuffled = [...items];
+
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[randomIndex]] = [
+        shuffled[randomIndex],
+        shuffled[index],
+      ];
+    }
+
+    return shuffled;
+  }
+
+  function handleCardClick() {
+    setCharacters((currentCharacters) => shuffleCharacters(currentCharacters));
+  }
+
   useEffect(() => {
     async function fetchCharacters() {
       try {
@@ -24,7 +42,7 @@ function CardGrid() {
           image: item.sprites.other["official-artwork"].front_default,
         }));
 
-        setCharacters(characterData);
+        setCharacters(shuffleCharacters(characterData));
       } catch (error) {
         console.error("Failed to fetch characters", error);
       } finally {
@@ -46,6 +64,7 @@ function CardGrid() {
           key={character.id}
           name={character.name}
           image={character.image}
+          onClick={handleCardClick}
         />
       ))}
     </section>
