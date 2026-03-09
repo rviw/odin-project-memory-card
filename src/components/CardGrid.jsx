@@ -4,6 +4,7 @@ import "../styles/CardGrid.css";
 
 function CardGrid() {
   const [characters, setCharacters] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchCharacters() {
@@ -26,11 +27,17 @@ function CardGrid() {
         setCharacters(characterData);
       } catch (error) {
         console.error("Failed to fetch characters", error);
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchCharacters();
   }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <section className="card-grid">
