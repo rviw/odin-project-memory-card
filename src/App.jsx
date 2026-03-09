@@ -6,14 +6,17 @@ import "./styles/App.css";
 
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
   const [clickedCharacterIds, setClickedCharacterIds] = useState([]);
 
   return (
     <main className="app">
       <Header />
-      <Scoreboard currentScore={currentScore} />
+      <Scoreboard currentScore={currentScore} bestScore={bestScore} />
       <CardGrid
         setCurrentScore={setCurrentScore}
+        bestScore={bestScore}
+        setBestScore={setBestScore}
         clickedCharacterIds={clickedCharacterIds}
         setClickedCharacterIds={setClickedCharacterIds}
       />

@@ -4,6 +4,8 @@ import "../styles/CardGrid.css";
 
 function CardGrid({
   setCurrentScore,
+  bestScore,
+  setBestScore,
   clickedCharacterIds,
   setClickedCharacterIds,
 }) {
@@ -31,8 +33,14 @@ function CardGrid({
       setCurrentScore(0);
       setClickedCharacterIds([]);
     } else {
-      setCurrentScore((score) => score + 1);
+      const nextScore = clickedCharacterIds.length + 1;
+
+      setCurrentScore(nextScore);
       setClickedCharacterIds((currentIds) => [...currentIds, characterId]);
+
+      if (nextScore > bestScore) {
+        setBestScore(nextScore);
+      }
     }
 
     setCharacters((currentCharacters) => shuffleCharacters(currentCharacters));

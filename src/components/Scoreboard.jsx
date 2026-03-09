@@ -1,6 +1,6 @@
 import "../styles/Scoreboard.css";
 
-function Scoreboard({ currentScore }) {
+function Scoreboard({ currentScore, bestScore }) {
   return (
     <section className="scoreboard">
       <div className="scoreboard__item">
@@ -9,7 +9,7 @@ function Scoreboard({ currentScore }) {
       </div>
       <div className="scoreboard__item">
         <span className="scoreboard__label">Best</span>
-        <span className="scoreboard__value">0</span>
+        <span className="scoreboard__value">{bestScore}</span>
       </div>
     </section>
   );
