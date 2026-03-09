@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import "../styles/CardGrid.css";
 
-function CardGrid({ setCurrentScore }) {
+function CardGrid({
+  setCurrentScore,
+  clickedCharacterIds,
+  setClickedCharacterIds,
+}) {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,8 +24,17 @@ function CardGrid({ setCurrentScore }) {
     return shuffled;
   }
 
-  function handleCardClick() {
-    setCurrentScore((score) => score + 1);
+  function handleCardClick(characterId) {
+    const isDuplicateClick = clickedCharacterIds.includes(characterId);
+
+    if (isDuplicateClick) {
+      setCurrentScore(0);
+      setClickedCharacterIds([]);
+    } else {
+      setCurrentScore((score) => score + 1);
+      setClickedCharacterIds((currentIds) => [...currentIds, characterId]);
+    }
+
     setCharacters((currentCharacters) => shuffleCharacters(currentCharacters));
   }
 
@@ -65,7 +78,7 @@ function CardGrid({ setCurrentScore }) {
           key={character.id}
           name={character.name}
           image={character.image}
-          onClick={handleCardClick}
+          onClick={() => handleCardClick(character.id)}
         />
       ))}
     </section>
