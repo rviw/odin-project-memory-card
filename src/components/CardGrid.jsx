@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import "../styles/CardGrid.css";
 
-function CardGrid() {
+function CardGrid({ setCurrentScore }) {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +21,7 @@ function CardGrid() {
   }
 
   function handleCardClick() {
+    setCurrentScore((score) => score + 1);
     setCharacters((currentCharacters) => shuffleCharacters(currentCharacters));
   }
 
